@@ -1,0 +1,5 @@
+run server
+python manage.py runserver
+create app
+python manage.py startapp events
+python manage.py startapp events
