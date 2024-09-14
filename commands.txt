@@ -5,8 +5,8 @@ python manage.py startapp events
 python manage.py startapp events
 
 migrate
-python manage.py migrate
 python manage.py makemigrations
+python manage.py migrate
 
 create super-user
 python manage.py createsuperuser
