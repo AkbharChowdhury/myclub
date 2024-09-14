@@ -3,3 +3,11 @@ python manage.py runserver
 create app
 python manage.py startapp events
 python manage.py startapp events
+
+migrate
+python manage.py migrate
+python manage.py makemigrations
+
+create super-user
+python manage.py createsuperuser
+password5276
