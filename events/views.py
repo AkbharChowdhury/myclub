@@ -1,16 +1,13 @@
 import calendar
-
-from django.shortcuts import render
 from calendar import HTMLCalendar
-import calendar
 from datetime import datetime
 
+from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import render
 from django.views.generic import CreateView
 
 from .models import Event, Venue
-from .forms import VenueForm
-from django.http import HttpResponseRedirect
-from django.contrib.messages.views import SuccessMessageMixin
+from django.shortcuts import get_object_or_404
 
 
 def home(request, year=datetime.now().year, month=datetime.now().strftime("%B")):
@@ -58,3 +55,12 @@ class VenueCreateView(SuccessMessageMixin, CreateView):
     success_message = f'venue created'.title()
     success_url = 'add_venue'
 
+
+def list_venues(request):
+    venue_list = Venue.objects.all()
+    return render(request, 'venue.html', {'venue_list': venue_list})
+
+
+def show_venue(request, venue_id):
+    venue = get_object_or_404(Venue, pk=venue_id)
+    return render(request, 'show_venue.html', {'venue': venue})

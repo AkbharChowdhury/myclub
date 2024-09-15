@@ -16,15 +16,22 @@
                 </li>
 
                 <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.view_name == 'list-events' %}active{% endif %}"
-                       {% if request.resolver_match.view_name == 'list-events' %}aria-current="page"{% endif %}
-                       href="{% url 'list-events' %}">Events</a>
+                    <a class="nav-link {% if request.resolver_match.view_name == 'list_events' %}active{% endif %}"
+                       {% if request.resolver_match.view_name == 'list_events' %}aria-current="page"{% endif %}
+                       href="{% url 'list_events' %}">Events</a>
                 </li>
             
               <li class="nav-item">
                     <a class="nav-link text-capitalize {% if request.resolver_match.view_name == 'add_venue' %}active{% endif %}"
                        {% if request.resolver_match.view_name == 'add_venue' %}aria-current="page"{% endif %}
                        href="{% url 'add_venue' %}">add venue</a>
+                </li>
+
+
+                   <li class="nav-item">
+                    <a class="nav-link text-capitalize {% if request.resolver_match.view_name == 'list_venue' %}active{% endif %}"
+                       {% if request.resolver_match.view_name == 'list_venue' %}aria-current="page"{% endif %}
+                       href="{% url 'list_venue' %}">venues</a>
                 </li>
 
                 {#        <li class="nav-item dropdown">#}
