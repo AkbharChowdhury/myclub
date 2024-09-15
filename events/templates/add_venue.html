@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% load crispy_forms_filters %}
+{% load crispy_forms_tags %}
+{% block content %}
+    <div class="container py-4">
+{#    {% include 'messages.html' %}#}
+
+
+        <h1 class="text-capitalize">add venue</h1>
+        <form action="" method="post" novalidate>
+            {% csrf_token %}
+            <fieldset class="form-group">
+{#                <legend class="border-bottom mb-4 text-capitalize">blog post</legend>#}
+                {{ form|crispy }}
+            </fieldset>
+
+            <div class="form-group pb-3">
+                <button type="submit" class="btn btn-success text-capitalize">add venue</button>
+            </div>
+        </form>
+        {#    {{ is_submitted }}#}
+        {#        {% if is_submitted %}#}
+        {#            <div class="alert alert-success" role="alert">#}
+        {#                Venue Added#}
+        {#            </div>#}
+        {#        {% else %}#}
+        {#            <form action="" method="post">#}
+        {#                {% csrf_token %}#}
+        {#                {{ form|crispy }}#}
+        {#                <input type="submit" value="add venue" class="btn btn-success text-capitalize" role="button">#}
+        {#            </form>#}
+        {#        {% endif %}#}
+
+    </div>
+{% endblock %}
+
