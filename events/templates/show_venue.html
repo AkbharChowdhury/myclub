@@ -8,21 +8,8 @@
                 <li class="breadcrumb-item active" aria-current="page">Venue Details</li>
             </ol>
         </nav>
-        <div class="card mb-3">
-            <div class="card-header text-capitalize">
-                Venue
-            </div>
-            <div class="card-body">
-                <h5 class="card-title">{{ venue }}</h5>
-                <p class="card-text">
-                    <li>{{ venue.address }}, {{ venue.zip_code }} </li>
-                    <li> Phone: <a href="tel:{{ venue.phone }}">{{ venue.phone }}</a></li>
-                    <li> Email: <a href="mailto:{{ venue.email }}">{{ venue.email }}</a></li>
-                    <li> Website: <a href="{{ venue.web }}">{{ venue.web }}</a></li>
-                </p>
-                {#    <a href="#" class="btn btn-primary">Go somewhere</a>#}
-            </div>
-        </div>
+
+        {% include 'venue_card.html' with venue=venue %}
 
 
     </div>

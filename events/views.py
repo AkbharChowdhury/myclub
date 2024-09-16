@@ -64,3 +64,11 @@ def list_venues(request):
 def show_venue(request, venue_id):
     venue = get_object_or_404(Venue, pk=venue_id)
     return render(request, 'show_venue.html', {'venue': venue})
+
+
+def search_venues(request):
+    if request.method == 'POST':
+        searched = request.POST['searched']
+        venues = Venue.objects.filter(name__contains=searched)
+        return render(request, 'search_venue.html', {'searched': searched, 'venues': venues})
+    return render(request, 'search_venue.html', {})

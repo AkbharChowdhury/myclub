@@ -16,5 +16,6 @@ urlpatterns = [
     path('list_venues/', views.list_venues, name='list_venue'),
     # path('show_venue/', views.show_venue, name='show_venue'),
     path('show_venue/<int:venue_id>', views.show_venue, name='show_venue'),
+    path('search_venues', views.search_venues, name='search_venues'),
 
 ]
