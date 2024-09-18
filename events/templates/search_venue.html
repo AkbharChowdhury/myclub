@@ -5,7 +5,7 @@
             <h1><span class="text-capitalize">you searched for</span> {{ searched }}</h1>
             {% for venue in venues %}
 
-                {% include 'venue_card.html' with venue=venue %}
+                {% include 'includes/venue_card.html' with venue=venue %}
 
             {% endfor %}
 
