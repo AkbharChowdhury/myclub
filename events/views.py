@@ -3,8 +3,8 @@ from calendar import HTMLCalendar
 from datetime import datetime
 
 from django.contrib.messages.views import SuccessMessageMixin
-from django.shortcuts import render
-from django.views.generic import CreateView
+from django.shortcuts import render, redirect
+from django.views.generic import CreateView, UpdateView
 
 from .models import Event, Venue
 from django.shortcuts import get_object_or_404
@@ -54,6 +54,17 @@ class VenueCreateView(SuccessMessageMixin, CreateView):
     fields = '__all__'
     success_message = f'venue created'.title()
     success_url = 'add_venue'
+
+
+class VenueUpdateView(UpdateView):
+    model = Venue
+    context_object_name = 'post'
+    template_name = 'update_venue.html'
+    fields = '__all__'
+    success_message = 'venue updated'.title()
+    success_url = '/list_venues/'
+
+
 
 
 def list_venues(request):

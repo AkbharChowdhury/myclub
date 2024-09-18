@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+
+{% block title %}update venue{% endblock %}
+
+{% block content %}
+    <div class="container">
+    <h1 class="text-capitalize">update venue</h1>
+
+        <form action="" method="post" novalidate enctype="multipart/form-data">
+            {% csrf_token %}
+            <fieldset class="form-group">
+                {{ form|crispy }}
+            </fieldset>
+
+            <div class="form-group pb-3">
+                <button type="submit" class="btn btn-success text-capitalize">update</button>
+            </div>
+        </form>
+
+    </div>
+{% endblock %}

@@ -1,12 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="container">
+    
         <h1>Venues</h1>
-        <div class="list-group">
+        {#        <div class="list-group">#}
+        {#            {% for venue in venue_list %}#}
+        {#                <a href="{% url 'show_venue' venue.id %}" class="list-group-item list-group-item-action">{{ venue }}</a>#}
+        {#             {% endfor %}#}
+        {#        </div>#}
+
+        <ul class="list-group">
             {% for venue in venue_list %}
-                <a href="{% url 'show_venue' venue.id %}" class="list-group-item list-group-item-action">{{ venue }}</a>
-            {% endfor %}
-        </div>
+            <li class="list-group-item d-flex justify-content-between align-items-center">
+                <a href="{% url 'show_venue' venue.id %}" class="text-dark text-decoration-none"> {{ venue }}</a>
+                <span class="badge text rounded-pill">
+                    <a href="{% url 'update_venue' venue.id %}" class=" btn btn-small btn-success">update</a>
+                </span>
+            </li>
+             {% endfor %}
+        </ul>
     </div>
 {% endblock %}
 
