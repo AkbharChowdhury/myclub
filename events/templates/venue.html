@@ -2,6 +2,7 @@
 {% block content %}
     <div class="container">
 
+
         <h1>Venues</h1>
         {#        <div class="list-group">#}
         {#            {% for venue in venue_list %}#}
@@ -11,13 +12,14 @@
 
         <ul class="list-group">
             {% for venue in venue_list %}
-            <li class="list-group-item d-flex justify-content-between align-items-center">
-                <a href="{% url 'show_venue' venue.id %}" class="text-dark text-decoration-none"> {{ venue }}</a>
-                <span class="badge text rounded-pill">
-                    <a href="{% url 'update_venue' venue.id %}" class="btn btn-success btn-sm text-capitalize">update</a>
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <a href="{% url 'show_venue' venue.id %}" class="text-dark text-decoration-none">{{ venue }}</a>
+                    <span class="badge text rounded-pill">
+                    <a href="{% url 'update_venue' venue.id %}"
+                       class="btn btn-success btn-sm text-capitalize">update</a>
                 </span>
-            </li>
-             {% endfor %}
+                </li>
+            {% endfor %}
         </ul>
     </div>
 {% endblock %}
