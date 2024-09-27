@@ -10,4 +10,4 @@ python manage.py migrate
 
 create super-user
 python manage.py createsuperuser
-password5276
+    password5276

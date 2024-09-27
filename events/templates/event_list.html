@@ -12,8 +12,6 @@
                     <p class="card-text">
 
 
-
-
                         <li>Venue: {{ event.venue }}</li>
                         <li> Manager: {{ event.manager }}</li>
                     <p class="muted">{{ event.description }}</p>
@@ -26,10 +24,18 @@
                     </p>
                     {#    <a href="#" class="btn btn-primary">Go somewhere</a>#}
                 </div>
+
+                <div class="card-footer text-body-secondary text-capitalize">
+                    <a class="btn btn-outline-secondary" href="#" role="button">update</a>
+                    <a class="btn btn-outline-danger" href="{% url 'delete_event' event.id %}" role="button">delete</a>
+
+
+                </div>
             </div>
         {% endfor %}
     </div>
-    <a href="https://www.youtube.com/watch?v=H3joYTIRqKk&list=PLCC34OHNcOtqW9BJmgQPPzUpJ8hl49AGy&index=5">Tutorial link</a>
+    <a href="https://www.youtube.com/watch?v=H3joYTIRqKk&list=PLCC34OHNcOtqW9BJmgQPPzUpJ8hl49AGy&index=5">Tutorial
+        link</a>
 {% endblock %}
 
 

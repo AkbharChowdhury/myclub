@@ -4,7 +4,7 @@ from datetime import datetime
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, UpdateView, ListView
+from django.views.generic import CreateView, UpdateView, ListView, DetailView, DeleteView
 
 from .models import Event, Venue
 from django.shortcuts import get_object_or_404
@@ -58,7 +58,9 @@ class VenueCreateView(SuccessMessageMixin, CreateView):
     template_name = 'add_venue.html'
     fields = '__all__'
     success_message = f'venue created'.title()
-    success_url = 'add_venue'
+
+    def get_success_url(self):
+        return reversed('add_venue')
 
 
 class VenueUpdateView(UpdateView):
@@ -72,14 +74,36 @@ class VenueUpdateView(UpdateView):
         return reversed('list_venue')
 
 
-def list_venues(request):
-    venue_list = Venue.objects.all()
-    return render(request, 'venue.html', {'venue_list': venue_list})
+class EventDeleteView(DeleteView):
+    model = Event
+    # context_object_name = 'post'
+    # template_name = 'update_venue.html'
+    # fields = '__all__'
+    success_message = 'event deleted'.title()
+    template_name = "event_delete.html"
+    success_url = '/'
+    #
+    # def get_success_url(self):
+    #     return reversed('list_events')
+
+
+# def list_venues(request):
+#     venue_list = Venue.objects.all()
+#     return render(request, 'venue.html', {'venue_list': venue_list})
+class VenueListView(ListView):
+    template_name = 'venue.html'
+    model = Venue
 
 
 def show_venue(request, venue_id):
     venue = get_object_or_404(Venue, pk=venue_id)
     return render(request, 'show_venue.html', {'venue': venue})
+
+
+class VenueDetailView(DetailView):
+    # specify the model to use
+    model = Venue
+    template_name = 'show_venue.html'
 
 
 def search_venues(request):
