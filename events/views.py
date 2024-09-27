@@ -4,7 +4,7 @@ from datetime import datetime
 
 from django.contrib.messages.views import SuccessMessageMixin
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView, UpdateView
+from django.views.generic import CreateView, UpdateView, ListView
 
 from .models import Event, Venue
 from django.shortcuts import get_object_or_404
@@ -27,9 +27,14 @@ def home(request, year=datetime.now().year, month=datetime.now().strftime("%B"))
                   })
 
 
-def all_events(request):
-    event_list = Event.objects.all()
-    return render(request, 'event_list.html', {'event_list': event_list})
+# def all_events(request):
+#     event_list = Event.objects.all()
+#     return render(request, 'event_list.html', {'event_list': event_list})
+
+
+class EventListView(ListView):
+    template_name = 'event_list.html'
+    model = Event
 
 
 # def add_venue(request):
@@ -62,9 +67,9 @@ class VenueUpdateView(UpdateView):
     template_name = 'update_venue.html'
     fields = '__all__'
     success_message = 'venue updated'.title()
-    success_url = '/list_venues/'
 
-
+    def get_success_url(self):
+        return reversed('list_venue')
 
 
 def list_venues(request):
