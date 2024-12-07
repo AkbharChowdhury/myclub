@@ -1,5 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Events for {{ month }} {{ year }}</h1>
-    {{ my_calendar|safe }}
+    <div class="container">
+        <h1>Events for {{ month }} {{ year }}</h1>
+        {{ my_calendar|safe }}
+    </div>
 {% endblock %}

@@ -3,6 +3,7 @@ from calendar import HTMLCalendar
 import calendar
 from calendar_utils import CalendarUtils
 
+
 def home(request, year: int = CalendarUtils.current_year(), month: str = CalendarUtils.current_month()):
     month_num = list(calendar.month_name).index(month.title())
     return render(request, 'home.html', {
