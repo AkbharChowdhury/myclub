@@ -5,11 +5,9 @@ import calendar
 import datetime
 
 
-# Create your views here.
 # def home(request):
 #     return render(request,'home.html',{})
-
-def home(request, year: int = datetime.date.year, month: str = "Jan"):
+def home(request, year: int = datetime.date.year, month: str = "march"):
     month_num = list(calendar.month_name).index(month.title())
     return render(request, 'home.html', {
         'year': year,
