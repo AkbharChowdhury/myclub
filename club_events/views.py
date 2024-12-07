@@ -1,13 +1,9 @@
 from django.shortcuts import render
-from calendar import month_name, HTMLCalendar
-import datetime
+from calendar import HTMLCalendar
 import calendar
-import datetime
+from calendar_utils import CalendarUtils
 
-
-# def home(request):
-#     return render(request,'home.html',{})
-def home(request, year: int = datetime.date.year, month: str = "march"):
+def home(request, year: int = CalendarUtils.current_year(), month: str = CalendarUtils.current_month()):
     month_num = list(calendar.month_name).index(month.title())
     return render(request, 'home.html', {
         'year': year,
