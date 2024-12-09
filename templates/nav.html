@@ -13,6 +13,12 @@
                        {% if request.resolver_match.view_name == 'event_list' %}aria-current="page" {% endif %}
                        href="{% url 'event_list' %}">Events</a>
                 </li>
+            
+             <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.view_name == 'add_venue' %} active{% else %}{% endif %}"
+                       {% if request.resolver_match.view_name == 'add_venue' %}aria-current="page" {% endif %}
+                       href="{% url 'add_venue' %}">Add Venue</a>
+                </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
                        aria-expanded="false">
