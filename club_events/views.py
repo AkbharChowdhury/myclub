@@ -1,6 +1,5 @@
 from django.contrib import messages
-from django.http import HttpResponseRedirect
-from django.shortcuts import render, redirect
+from django.shortcuts import render
 from calendar import HTMLCalendar
 import calendar
 
@@ -28,27 +27,25 @@ def all_events(request):
     })
 
 
-def add_venue(request):
-    if request.method == 'POST':
-        form = VenueForm(request.POST)
-        if form.is_valid():
-            form.save()
-            messages.success(request, 'Venue added successfully')
-            return redirect(reverse_lazy('add_venue'))
-        else:
-            messages.error(request, form.errors)
-    return render(request, 'add_venue.html', {
-        'form': VenueForm,
-    })
+# def add_venue(request):
+#     if request.method == 'POST':
+#         form = VenueForm(request.POST)
+#         if form.is_valid():
+#             form.save()
+#             messages.success(request, 'Venue added successfully')
+#             return redirect(reverse_lazy('add_venue'))
+#         else:
+#             messages.error(request, form.errors)
+#     return render(request, 'add_venue.html', {
+#         'form': VenueForm,
+#     })
 
 
 class VenueCreateView(CreateView):
     model = Venue
     template_name = 'add_venue.html'
     form_class = VenueForm
-    success_message = 'Venue added successfully'
 
     def get_success_url(self):
-        return redirect(reverse_lazy('add_venue'))
-
-    # success_url = redirect(reverse_lazy('add_venue'))
+        messages.success(self.request, 'Venue added successfully')
+        return reverse_lazy('home')
