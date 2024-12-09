@@ -1,0 +1,51 @@
+install django
+pip install django
+pip install --upgrade pip
+install crispy forms
+pip install django-crispy-forms
+pip install crispy-bootstrap5
+
+create a django project
+django-admin startproject blog
+pip install --upgrade pip
+
+-- install libraries
+ck-editor
+pip install django-ckeditor
+Pillow
+pip install Pillow
+pip install decouple
+cd blog
+
+python3 manage.py runserver
+
+create an app
+python manage.py startapp myapp
+
+migration
+python3 manage.py makemigrations
+python3 manage.py migrate
+
+shell
+python manage.py dbshell
+shell commands
+.tables
+.header on
+.mode column pragma table_info('blog_articles_article_likes');
+
+python manage.py shell
+
+from articles.models import Article
+
+Article.objects.all()
+article = Article()
+article.title = 'test title'
+
+python3 manage.py createsuperuser
+
+admin
+test1234--
+johndoe1
+password1239
+janeDoe
+password493029
