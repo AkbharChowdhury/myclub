@@ -2,8 +2,9 @@
 {% block content %}
     <div class="container">
         <h1>Events</h1>
-        {{ events }}
-
-
+        <hr>
+        {% for event in events %}
+            {% include 'includes/event_card.html' with event=event only %}
+        {% endfor %}
     </div>
 {% endblock %}

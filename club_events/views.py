@@ -14,7 +14,7 @@ def home(request, year: int = CalendarUtils.current_year(), month: str = Calenda
 
 
 def all_events(request):
-    events = Event.objects.all()
+    events = Event.objects.all().order_by('event_date_time')
     return render(request, 'event_list.html', {
         'events': events,
     })

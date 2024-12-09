@@ -1,0 +1,22 @@
+<div class="col-md-8">
+    <div class="card mb-4">
+        <div class="card-header">
+            {{ event.name }}
+        </div>
+        <div class="card-body">
+            <h5 class="card-title text-capitalize">{{ event.venue }}</h5>
+            <h5 class="card-title">{{ event.event_date_time }}</h5>
+            <p>Manager: <span><strong>{{ event.manager }}</strong></span></p>
+            <p class="card-text">{{ event.description }}</p>
+            {% if event.attendees.exists %}
+                <p>Attendees:</p>
+                <ul>
+                    {% for attendee in event.attendees.all %}
+                        <li> {{ attendee }}</li>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+            <a href="{{ event.venue.web }}" class="btn btn-primary">Website</a>
+        </div>
+    </div>
+</div>
