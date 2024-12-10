@@ -16,8 +16,6 @@ class Venue(models.Model):
         return self.name
 
 
-
-
 class Event(models.Model):
     name = models.CharField(max_length=120)
     event_date_time = models.DateTimeField()

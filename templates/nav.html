@@ -1,6 +1,13 @@
+{% load static %}
 <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="{% url 'home' %}">MyClub</a>
+        {#        <a class="navbar-brand" href="{% url 'home' %}">Hostly Party Planners and Consultants</a>#}
+        <a class="navbar-brand" href="{% url 'home' %}">
+            <img src="{% static 'assets/logo.png' %}" alt="Logo" width="40" height="30"
+                 class="d-inline-block align-text-top">
+            Hostly Party Planners and Consultants
+        </a>
+
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
                 aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -13,11 +20,18 @@
                        {% if request.resolver_match.view_name == 'event_list' %}aria-current="page" {% endif %}
                        href="{% url 'event_list' %}">Events</a>
                 </li>
-            
-             <li class="nav-item">
+
+                <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.view_name == 'add_venue' %} active{% else %}{% endif %}"
                        {% if request.resolver_match.view_name == 'add_venue' %}aria-current="page" {% endif %}
                        href="{% url 'add_venue' %}">Add Venue</a>
+                </li>
+
+
+                <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.view_name == 'list_venues' %} active{% else %}{% endif %}"
+                       {% if request.resolver_match.view_name == 'list_venues' %}aria-current="page" {% endif %}
+                       href="{% url 'list_venues' %}">Venues</a>
                 </li>
                 <li class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
@@ -31,8 +45,9 @@
                     </ul>
                 </li>
             </ul>
-            <form class="d-flex" role="search">
-                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
+            <form class="d-flex" role="search" action="{% url 'search_venue' %}">
+                {#                {% csrf_token %}#}
+                <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>
         </div>

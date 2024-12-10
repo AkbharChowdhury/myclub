@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+    <div class="container">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href="{% url 'list_venues' %}">All venues</a></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ venue }}</li>
+            </ol>
+        </nav>
+        <h1>{{ venue }}</h1>
+        <div class="card">
+            <div class="card-body">
+                <h4>Address:</h4>
+                <p>{{ venue.address }}, <br>{{ venue.zip_code }}</p>
+                <p>Phone: {{ venue.phone }}</p>
+                <a href="{{ venue.web }}">website</a>
+            </div>
+        </div>
+    </div>
+{% endblock %}
