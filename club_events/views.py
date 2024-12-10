@@ -7,6 +7,7 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
 
 from calendar_utils import CalendarUtils
+from club_events.printer import Printer
 from .models import Event, Venue
 from .forms import VenueForm
 
@@ -73,3 +74,11 @@ class SearchVenueList(ListView):
 
     def get_queryset(self):
         return Venue.objects.filter(name__icontains=self.request.GET['q'])
+
+
+def venue_text(request):
+    return Printer().text_file()
+
+
+def venue_csv(request):
+    return Printer().csv()

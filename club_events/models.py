@@ -1,7 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.shortcuts import redirect
-from django.urls import reverse_lazy
 
 
 class Venue(models.Model):
