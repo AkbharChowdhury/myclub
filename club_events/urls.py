@@ -5,6 +5,7 @@ urlpatterns = [
     path('<int:year>/<str:month>', views.home, name='home'),
     path('venue_text/', views.venue_text, name='venue_text'),
     path('venue_csv/', views.venue_csv, name='venue_csv'),
+    path('venue_pdf/', views.venue_pdf, name='venue_pdf'),
 
     path('events/', views.EventListView.as_view(), name='event_list'),
     # path('add_venue/', views.add_venue, name='add_venue'),

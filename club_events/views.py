@@ -82,3 +82,7 @@ def venue_text(request):
 
 def venue_csv(request):
     return Printer().csv()
+
+
+def venue_pdf(request):
+    return Printer().pdf()
