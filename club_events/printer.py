@@ -8,7 +8,7 @@ from .venue_pdf import PDF
 
 class Printer:
 
-    def venues(self, is_sep=False) -> list[str]:
+    def _venues(self, is_sep=False) -> list[str]:
         lines = []
         for venue in Venue.objects.all():
             lines.append(venue.name)
@@ -22,7 +22,7 @@ class Printer:
         response = HttpResponse(content_type="text/plain")
         response["Content-Disposition"] = self._attachment(FileExtension.TEXT_FILE)
 
-        for venue in self.venues():
+        for venue in self._venues():
             response.write(f'{venue}\n')
             response.write('\n')
         return response
@@ -40,5 +40,5 @@ class Printer:
         return f'attachment; filename="venue.{extension}"'
 
     def pdf(self):
-        pdf = PDF(venues=self.venues(is_sep=True))
+        pdf = PDF(venues=self._venues(is_sep=True))
         return pdf.generate_pdf()
