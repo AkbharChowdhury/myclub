@@ -18,7 +18,7 @@ class Printer:
                 lines.append('================')
         return lines
 
-    def text_file(self) -> HttpResponse:
+    def txt(self) -> HttpResponse:
         response = HttpResponse(content_type="text/plain")
         response["Content-Disposition"] = self._attachment(FileExtension.TEXT_FILE)
 

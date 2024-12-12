@@ -21,6 +21,7 @@ class Event(models.Model):
     manager = models.ForeignKey(User, on_delete=models.SET_NULL, blank=True, null=True)
     description = models.TextField(blank=True)
     attendees = models.ManyToManyField(User, related_name='attendees', blank=True)
+    approved = models.BooleanField(default=False)
 
     def __str__(self):
         return self.name

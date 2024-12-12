@@ -26,6 +26,13 @@
                        {% if request.resolver_match.view_name == 'add_venue' %}aria-current="page" {% endif %}
                        href="{% url 'add_venue' %}">Add Venue</a>
                 </li>
+            
+            
+              <li class="nav-item">
+                    <a class="nav-link {% if request.resolver_match.view_name == 'admin_approval' %} active{% else %}{% endif %}"
+                       {% if request.resolver_match.view_name == 'admin_approval' %}aria-current="page" {% endif %}
+                       href="{% url 'admin_approval' %}">Dashboard</a>
+                </li>
 
 
                 <li class="nav-item">
@@ -39,9 +46,9 @@
                         Download Venue
                     </a>
                     <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="{% url 'venue_pdf' %}">PDF</a></li>
-                        <li><a class="dropdown-item" href="{% url 'venue_text' %}">Text file</a></li>
-                        <li><a class="dropdown-item" href="{% url 'venue_csv' %}">CSV</a></li>
+                        <li><a class="dropdown-item" href="{% url 'venue_download' 'pdf' %}">PDF</a></li>
+                        <li><a class="dropdown-item" href="{% url 'venue_download' 'txt' %}">Text file</a></li>
+                        <li><a class="dropdown-item" href="{% url 'venue_download' 'csv' %}">CSV</a></li>
                     </ul>
                 </li>
             </ul>

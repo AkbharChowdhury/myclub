@@ -1,5 +1,5 @@
 from django.contrib import messages
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from calendar import HTMLCalendar
 import calendar
 
@@ -76,13 +76,37 @@ class SearchVenueList(ListView):
         return Venue.objects.filter(name__icontains=self.request.GET['q'])
 
 
-def venue_text(request):
-    return Printer().text_file()
+def venue_download(request, extension: str):
+    printer = Printer()
+    match extension:
+        case 'pdf':
+            return printer.pdf()
+        case 'txt':
+            return printer.txt()
+        case 'csv':
+            return printer.csv()
+        case _:
+            return printer.txt()
 
 
-def venue_csv(request):
-    return Printer().csv()
+class AdminApprovalCreateView(CreateView):
+    model = Event
+    fields = '__all__'
+    template_name = 'admin_approval.html'
+    ordering = ['event_date_time']
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["events"] = Event.objects.all().order_by('event_date_time')
+        return context
 
+    def post(self, request, *args, **kwargs):
+        events = Event.objects.all().order_by('event_date_time')
+        event_id_list = request.POST.getlist('approve_status')
+        events.update(approved=False)
+        for event_id in event_id_list:
+            Event.objects.filter(pk=int(event_id)).update(approved=True)
+        return self.get_success_url()
 
-def venue_pdf(request):
-    return Printer().pdf()
+    def get_success_url(self):
+        messages.success(self.request, "Events approval updated")
+        return redirect(reverse_lazy('home'))

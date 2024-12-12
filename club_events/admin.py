@@ -15,7 +15,7 @@ class VenueAdmin(admin.ModelAdmin):
 
 @admin.register(Event)
 class EventAdmin(admin.ModelAdmin):
-    fields = (('name', 'venue'), 'event_date_time', 'description', 'manager')
+    fields = (('name', 'venue'), 'event_date_time', 'description', 'manager', 'approved')
     list_display = ('name', 'event_date_time', 'venue')
     list_filter = ('event_date_time', 'venue')
     ordering = ['event_date_time']
