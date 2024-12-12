@@ -27,12 +27,6 @@ class EventListView(ListView):
     template_name = 'event_list.html'
     ordering = ['event_date_time']
 
-
-# def all_events(request):
-#     return render(request, 'event_list.html', {
-#         'events': Event.objects.all().order_by('event_date_time'),
-#     })
-
 class VenueCreateView(CreateView):
     model = Venue
     template_name = 'add_venue.html'
@@ -89,24 +83,22 @@ def venue_download(request, extension: str):
             return printer.txt()
 
 
-class AdminApprovalCreateView(CreateView):
+class AdminApprovalCreateView(ListView):
     model = Event
     fields = '__all__'
     template_name = 'admin_approval.html'
+    context_object_name = 'events'
     ordering = ['event_date_time']
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context["events"] = Event.objects.all().order_by('event_date_time')
-        return context
 
     def post(self, request, *args, **kwargs):
         events = Event.objects.all().order_by('event_date_time')
         event_id_list = request.POST.getlist('approve_status')
         events.update(approved=False)
+
         for event_id in event_id_list:
             Event.objects.filter(pk=int(event_id)).update(approved=True)
         return self.get_success_url()
 
     def get_success_url(self):
         messages.success(self.request, "Events approval updated")
-        return redirect(reverse_lazy('home'))
+        return redirect(reverse_lazy('admin_approval'))
