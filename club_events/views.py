@@ -14,7 +14,7 @@ from .forms import VenueForm
 
 def home(request, year: int = CalendarUtils.current_year(), month: str = CalendarUtils.current_month()):
     month_num = list(calendar.month_name).index(month.title())
-    return render(request, 'home.html', {
+    return render(request, 'events/home.html', {
         'year': year,
         'month': month,
         'my_calendar': HTMLCalendar().formatmonth(year, month_num),
@@ -24,12 +24,12 @@ def home(request, year: int = CalendarUtils.current_year(), month: str = Calenda
 class EventListView(ListView):
     model = Event
     context_object_name = 'events'
-    template_name = 'event_list.html'
+    template_name = 'events/event_list.html'
     ordering = ['event_date_time']
 
 class VenueCreateView(CreateView):
     model = Venue
-    template_name = 'add_venue.html'
+    template_name = 'events/add_venue.html'
     form_class = VenueForm
 
     def get_success_url(self):
@@ -40,12 +40,12 @@ class VenueCreateView(CreateView):
 class VenueListView(ListView):
     model = Venue
     context_object_name = 'venues'
-    template_name = 'venue.html'
+    template_name = 'events/venue.html'
     # ordering = ['event_date_time']
 
 
 def list_venues(request):
-    return render(request, 'venue.html', {
+    return render(request, 'events/venue.html', {
         'venues': Venue.objects.all(),
     })
 
@@ -53,13 +53,13 @@ def list_venues(request):
 class VenueDetailView(DetailView):
     model = Venue
     context_object_name = 'venue'
-    template_name = 'show_venue.html'
+    template_name = 'events/show_venue.html'
 
 
 class SearchVenueList(ListView):
     model = Venue
     context_object_name = 'venues'
-    template_name = 'search_venue.html'
+    template_name = 'events/search_venue.html'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
@@ -86,7 +86,7 @@ def venue_download(request, extension: str):
 class AdminApprovalCreateView(ListView):
     model = Event
     fields = '__all__'
-    template_name = 'admin_approval.html'
+    template_name = 'events/admin_approval.html'
     context_object_name = 'events'
     ordering = ['event_date_time']
 
