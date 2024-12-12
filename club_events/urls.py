@@ -7,6 +7,8 @@ urlpatterns = [
     path('events/', views.EventListView.as_view(), name='event_list'),
     # path('add_venue/', views.add_venue, name='add_venue'),
     path('add_venue/', views.VenueCreateView.as_view(), name='add_venue'),
+    path('add_event/', views.EventCreateView.as_view(), name='add_event'),
+
     path('list_venues/', views.VenueListView.as_view(), name='list_venues'),
     path('show_venue/<int:pk>', views.VenueDetailView.as_view(), name='show_venue'),
 

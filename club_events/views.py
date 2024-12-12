@@ -9,7 +9,7 @@ from django.views.generic import CreateView, ListView, DetailView
 from calendar_utils import CalendarUtils
 from club_events.printer import Printer
 from .models import Event, Venue
-from .forms import VenueForm
+from .forms import VenueForm, EventForm
 
 
 def home(request, year: int = CalendarUtils.current_year(), month: str = CalendarUtils.current_month()):
@@ -35,7 +35,14 @@ class VenueCreateView(CreateView):
     def get_success_url(self):
         messages.success(self.request, 'Venue added successfully')
         return reverse_lazy('home')
+class EventCreateView(CreateView):
+    model = Event
+    template_name = 'events/add_event.html'
+    form_class = EventForm
 
+    def get_success_url(self):
+        messages.success(self.request, 'Venue added successfully')
+        return reverse_lazy('home')
 
 class VenueListView(ListView):
     model = Venue
@@ -44,10 +51,7 @@ class VenueListView(ListView):
     # ordering = ['event_date_time']
 
 
-def list_venues(request):
-    return render(request, 'events/venue.html', {
-        'venues': Venue.objects.all(),
-    })
+
 
 
 class VenueDetailView(DetailView):
