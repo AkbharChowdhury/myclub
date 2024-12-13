@@ -10,7 +10,7 @@ class VenueForm(forms.ModelForm):
 
 
 class EventForm(forms.ModelForm):
-    attendees = forms.ModelMultipleChoiceField(queryset=User.objects.filter(is_active=True),
+    attendees = forms.ModelMultipleChoiceField(queryset=User.objects.filter(is_staff=False ),
                                                widget=forms.CheckboxSelectMultiple())
     manager = forms.ModelChoiceField(queryset=User.objects.filter(is_staff=True))
     event_date_time = forms.DateTimeField()

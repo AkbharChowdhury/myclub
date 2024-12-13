@@ -5,7 +5,7 @@ flatpickr(event_date_time, {
     enableTime: true,
     altInput: true,
     dateFormat: "Y-m-d H:i",
-    altFormat: 'l J F, Y H:i',
+    altFormat: 'l J F, Y h:i K',
     minDate: 'today',
     defaultDate: date_time !== '' ? date_time : new Date(),
 
