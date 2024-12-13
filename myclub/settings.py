@@ -39,6 +39,7 @@ INSTALLED_APPS = [
     "crispy_bootstrap5",
     'club_events.apps.ClubEventsConfig',
     'users.apps.UsersConfig',
+    "django_flatpickr",
 
 ]
 CRISPY_ALLOWED_TEMPLATE_PACKS = "bootstrap5"

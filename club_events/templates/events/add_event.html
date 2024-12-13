@@ -7,10 +7,32 @@
             <fieldset class="form-group">
                 <legend class="border-bottom mb-4 text-capitalize">Add Event</legend>
                 {{ form|crispy }}
+                <!-- File: myapp/custom-form.html -->
+                {#{{ form.media }}  {# Adds all flatpickr JS/CSS files from CDN #}
+{#                {{ form.as_p }}   {# Renders the form#}
+
+                {#  {% bootstrap_form form %}#}
             </fieldset>
             <div class="form-group pb-3">
                 <button type="submit" class="btn btn-outline-info text-capitalize">Add Event</button>
             </div>
         </form>
     </div>
+{% endblock %}
+{% block scripts %}
+    <script>
+        const event_date_time = '#id_event_date_time';
+        const start = flatpickr(event_date_time, {
+
+            enableTime: true,
+            {#dateFormat: 'Y-m-d',#}
+                dateFormat: "Y-m-d H:i",
+
+            altInput: true,
+            altFormat: 'l J F, Y H:i',
+            defaultDate: document.querySelector(event_date_time).value !== '' ? document.querySelector(event_date_time).value : new Date(),
+            minDate: 'today'
+
+        });
+    </script>
 {% endblock %}
