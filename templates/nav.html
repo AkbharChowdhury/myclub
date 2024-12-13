@@ -1,7 +1,6 @@
 {% load static %}
 <nav class="navbar navbar-expand-lg bg-body-tertiary sticky-top">
     <div class="container-fluid">
-        {#        <a class="navbar-brand" href="{% url 'home' %}">Hostly Party Planners and Consultants</a>#}
         <a class="navbar-brand" href="{% url 'home' %}">
             <img src="{% static 'assets/logo.png' %}" alt="Logo" width="40" height="30"
                  class="d-inline-block align-text-top">
@@ -28,18 +27,19 @@
                 </li>
 
 
-            <li class="nav-item">
+                <li class="nav-item">
                     <a class="nav-link {% if request.resolver_match.view_name == 'add_event' %} active{% else %}{% endif %}"
                        {% if request.resolver_match.view_name == 'add_event' %}aria-current="page" {% endif %}
                        href="{% url 'add_event' %}">Add Event</a>
                 </li>
-            
-            
-              <li class="nav-item">
-                    <a class="nav-link {% if request.resolver_match.view_name == 'admin_approval' %} active{% else %}{% endif %}"
-                       {% if request.resolver_match.view_name == 'admin_approval' %}aria-current="page" {% endif %}
-                       href="{% url 'admin_approval' %}">Dashboard</a>
-                </li>
+
+                {% if user.is_authenticated and request.user.is_staff %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.view_name == 'admin_approval' %} active{% else %}{% endif %}"
+                           {% if request.resolver_match.view_name == 'admin_approval' %}aria-current="page" {% endif %}
+                           href="{% url 'admin_approval' %}">Dashboard</a>
+                    </li>
+                {% endif %}
 
 
                 <li class="nav-item">
@@ -58,9 +58,39 @@
                         <li><a class="dropdown-item" href="{% url 'venue_download' 'csv' %}">CSV</a></li>
                     </ul>
                 </li>
+
+                {% if request.user.is_authenticated %}
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                           aria-expanded="false">
+                            {{ request.user }}
+                        </a>
+                        <ul class="dropdown-menu">
+
+                            <form method="post" action="{% url 'logout' %}">
+                                {% csrf_token %}
+                                <li>
+                                    <button class="dropdown-item" type="submit">Logout {{ request.user }}</button>
+                                </li>
+                            </form>
+
+                        </ul>
+                    </li>
+                {% endif %}
+
+                {% if not user.is_authenticated %}
+                    <li class="nav-item">
+                        <a class="nav-link {% if request.resolver_match.view_name == 'login' %} active{% else %}{% endif %}"
+                           {% if request.resolver_match.view_name == 'login' %}aria-current="page" {% endif %}
+                           href="{% url 'login' %}">Sign in</a>
+                    </li>
+                {% endif %}
+
             </ul>
+
+
             <form class="d-flex" role="search" action="{% url 'search_venue' %}">
-                {#                {% csrf_token %}#}
                 <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" name="q">
                 <button class="btn btn-outline-success" type="submit">Search</button>
             </form>

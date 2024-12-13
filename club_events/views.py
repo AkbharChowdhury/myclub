@@ -1,4 +1,5 @@
 from django.contrib import messages
+from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
 from calendar import HTMLCalendar
 import calendar
@@ -10,6 +11,11 @@ from calendar_utils import CalendarUtils
 from club_events.printer import Printer
 from .models import Event, Venue
 from .forms import VenueForm, EventForm
+
+
+class StaffRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
+    def test_func(self):
+        return self.request.user.is_staff
 
 
 def home(request, year: int = CalendarUtils.current_year(), month: str = CalendarUtils.current_month()):
@@ -27,6 +33,7 @@ class EventListView(ListView):
     template_name = 'events/event_list.html'
     ordering = ['event_date_time']
 
+
 class VenueCreateView(CreateView):
     model = Venue
     template_name = 'events/add_venue.html'
@@ -35,6 +42,8 @@ class VenueCreateView(CreateView):
     def get_success_url(self):
         messages.success(self.request, 'Venue added successfully')
         return reverse_lazy('home')
+
+
 class EventCreateView(CreateView):
     model = Event
     template_name = 'events/add_event.html'
@@ -44,14 +53,12 @@ class EventCreateView(CreateView):
         messages.success(self.request, 'Venue added successfully')
         return reverse_lazy('home')
 
+
 class VenueListView(ListView):
     model = Venue
     context_object_name = 'venues'
     template_name = 'events/venue.html'
     # ordering = ['event_date_time']
-
-
-
 
 
 class VenueDetailView(DetailView):
@@ -87,7 +94,7 @@ def venue_download(request, extension: str):
             return printer.txt()
 
 
-class AdminApprovalCreateView(ListView):
+class AdminApprovalCreateView(StaffRequiredMixin, ListView):
     model = Event
     fields = '__all__'
     template_name = 'events/admin_approval.html'

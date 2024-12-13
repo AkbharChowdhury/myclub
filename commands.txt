@@ -20,7 +20,7 @@ cd blog
 python3 manage.py runserver
 
 create an app
-python manage.py startapp myapp
+python3 manage.py startapp users
 
 migration
 python3 manage.py makemigrations
@@ -49,3 +49,6 @@ johndoe1
 password1239
 janeDoe
 password493029
+
+sam123
+password493029345
