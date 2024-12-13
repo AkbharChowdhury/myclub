@@ -8,9 +8,9 @@ from django.urls import reverse_lazy
 from django.views.generic import CreateView, ListView, DetailView
 
 from calendar_utils import CalendarUtils
-from club_events.printer import Printer
-from .models import Event, Venue
-from .forms import VenueForm, EventForm
+from club_events.classes.printer import Printer
+from club_events.models import Event, Venue
+from club_events.forms import VenueForm, EventForm
 
 
 class StaffRequiredMixin(LoginRequiredMixin, UserPassesTestMixin):
@@ -58,7 +58,6 @@ class VenueListView(ListView):
     model = Venue
     context_object_name = 'venues'
     template_name = 'events/venue.html'
-    # ordering = ['event_date_time']
 
 
 class VenueDetailView(DetailView):

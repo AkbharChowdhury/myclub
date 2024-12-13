@@ -1,9 +1,8 @@
 import csv
 from django.http import HttpResponse
-from .models import Venue
-from .file_extension import FileExtension
-
-from .venue_pdf import PDF
+from club_events.models import Venue
+from club_events.classes.file_extension import FileExtension
+from club_events.classes.pdf import PDF
 
 
 class Printer:
@@ -40,5 +39,4 @@ class Printer:
         return f'attachment; filename="venue.{extension}"'
 
     def pdf(self):
-        pdf = PDF(venues=self._venues(is_sep=True))
-        return pdf.generate_pdf()
+        return PDF(venues=self._venues(is_sep=True)).generate_pdf()
