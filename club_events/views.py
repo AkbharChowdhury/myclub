@@ -70,10 +70,13 @@ class SearchVenueList(ListView):
     model = Venue
     context_object_name = 'venues'
     template_name = 'events/search_venue.html'
+    ordering = 'name'
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         context["searched"] = self.request.GET.get("q")
+        context["all_venues"] = self.model.objects.all().order_by(self.ordering)
+
         return context
 
     def get_queryset(self):

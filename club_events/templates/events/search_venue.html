@@ -7,7 +7,12 @@
             {% for venue in venues %}
                 <a href="{% url 'show_venue'  venue.id %}">{{ venue }}</a> <br>
             {% endfor %}
-
+        {% else %}
+            <h1 class="text-capitalize">All venues</h1>
+            <hr>
+            {% for venue in all_venues %}
+                <a href="{% url 'show_venue'  venue.id %}">{{ venue }}</a> <br>
+            {% endfor %}
         {% endif %}
 
     </div>

@@ -13,7 +13,11 @@
                 <h4>Address:</h4>
                 <p>{{ venue.address }}, <br>{{ venue.zip_code }}</p>
                 <p>Phone: {{ venue.phone }}</p>
-                <a href="{{ venue.web }}">website</a>
+{#                <a href="{{ venue.web }}">website</a>#}
+                {% if venue.image %}
+                    <img src="{{ venue.image.url }}" class="img-thumbnail img-fluid rounded  d-block" alt="Venue image" width="400" height="400">
+
+                {% endif %}
             </div>
         </div>
     </div>

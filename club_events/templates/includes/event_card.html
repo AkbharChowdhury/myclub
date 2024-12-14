@@ -1,3 +1,6 @@
+
+{% load humanize %}
+
 <div class="col-md-8">
     <div class="card mb-4">
         <div class="card-header">
@@ -5,7 +8,7 @@
         </div>
         <div class="card-body">
             <h5 class="card-title text-capitalize">{{ event.venue }}</h5>
-            <h5 class="card-title">{{ event.event_date_time }}</h5>
+            <h5 class="card-title">{{ event.event_date_time }} | <span class="text-muted">{{ event.event_date_time|naturaltime }}</span></h5>
             <p>Manager: <span><strong>{{ event.manager }}</strong></span></p>
             <p class="card-text">{{ event.description }}</p>
             {% if event.attendees.exists %}

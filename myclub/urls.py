@@ -16,3 +16,8 @@ urlpatterns = [
 ]
 if settings.DEBUG:
     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+admin.site.site_header = 'MyClub Admin'
+admin.site.site_title = 'MyClub Admin'
+admin.site.index_title = 'Welcome to the admin site'
