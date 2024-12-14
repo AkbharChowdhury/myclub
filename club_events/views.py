@@ -34,7 +34,7 @@ class EventListView(ListView):
     ordering = ['event_date_time']
 
 
-class VenueCreateView(CreateView):
+class VenueCreateView(StaffRequiredMixin, CreateView):
     model = Venue
     template_name = 'events/add_venue.html'
     form_class = VenueForm
@@ -44,7 +44,7 @@ class VenueCreateView(CreateView):
         return reverse_lazy('home')
 
 
-class EventCreateView(CreateView):
+class EventCreateView(StaffRequiredMixin, CreateView):
     model = Event
     template_name = 'events/add_event.html'
     form_class = EventForm

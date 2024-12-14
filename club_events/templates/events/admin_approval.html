@@ -2,10 +2,14 @@
 {% load crispy_forms_tags %}
 {% block content %}
     <div class="container">
+    <h1 class="text-capitalize">admin approval portal</h1>
+
+        <hr>
+{#        <h1 class="border-bottom mb-4 text-capitalize">admin approval portal</h1>#}
+
         <form method="post">
             {% csrf_token %}
             <fieldset class="form-group">
-                <legend class="border-bottom mb-4 text-capitalize">admin approval portal</legend>
                 <div class="table-responsive">
                     <table class="table">
                         <thead>
