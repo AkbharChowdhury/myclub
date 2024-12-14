@@ -1,7 +1,6 @@
 from django.contrib import admin
-from .models import Venue, Event, MyClubUser
+from .models import Venue, Event
 
-admin.site.register(MyClubUser)
 
 
 @admin.register(Venue)
