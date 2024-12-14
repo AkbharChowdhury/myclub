@@ -101,7 +101,7 @@ class AdminApprovalCreateView(StaffRequiredMixin, ListView):
     fields = '__all__'
     template_name = 'events/admin_approval.html'
     context_object_name = 'events'
-    ordering = ['event_date_time']
+    ordering = 'event_date_time'
 
     def post(self, request, *args, **kwargs):
         events = Event.objects.all().order_by('event_date_time')

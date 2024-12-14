@@ -15,6 +15,14 @@ class Venue(models.Model):
         return self.name
 
 
+class VenueGallery(models.Model):
+    venue = models.ForeignKey(Venue, on_delete=models.CASCADE)
+    image = models.ImageField(upload_to='gallery/')
+
+    def __str__(self):
+        return self.venue
+
+
 class Event(models.Model):
     name = models.CharField(max_length=120)
     event_date_time = models.DateTimeField()
