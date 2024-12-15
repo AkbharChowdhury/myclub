@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.shortcuts import render, redirect
@@ -65,6 +67,14 @@ class VenueDetailView(DetailView):
     context_object_name = 'venue'
     template_name = 'events/show_venue.html'
 
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context['events'] = (Venue.objects.get(pk=self.kwargs['pk'])
+                             .event_set.all()
+                             .filter(event_date_time__gt=datetime.now())
+                             .order_by('event_date_time'))
+        return context
+
 
 class SearchVenueList(ListView):
     model = Venue
@@ -76,7 +86,6 @@ class SearchVenueList(ListView):
         context = super().get_context_data(**kwargs)
         context["searched"] = self.request.GET.get("q")
         context["all_venues"] = self.model.objects.all().order_by(self.ordering)
-
         return context
 
     def get_queryset(self):
